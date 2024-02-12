@@ -22,13 +22,13 @@ class TaskDeck():
         self.name = name
         self.tasks = []
 
-    def add_task(self, task):
+    def add_task(self): # TODO: add addition of a Task object
         name = input('Type the name of your task: ')
         type = 0
         url = input('Type the url of your task: ')
         progress = 0.0
         done = False
-        task =  Task(name, type, url, progress, done)
+        task = Task(name, type, url, progress, done)
         self.tasks.append(task)
 
     def remove_task(self, task):
@@ -40,10 +40,9 @@ def create_deck():
 
 
 class TaskDealer():
-    def __init__(self, name='defaultDealer', decks=None):
+    def __init__(self, name='defaultDealer', decks=[]):
         self.name = name
-        for d in decks:
-            self.decks = decks
+        self.decks = decks
 
     def add_deck(self, deck):
         self.decks.append(deck)
@@ -51,10 +50,11 @@ class TaskDealer():
     def remove_deck(self, deck):
         self.decks.remove(deck)
 
-    def deal(self, scheme=[]):
+    def deal(self, scheme=[1]):
         tasks = []
         for i, number_of_tasks in enumerate(scheme):
-            tasks.append(random.sample(self.decks[i], number_of_tasks))
+            tasks.append(random.sample(self.decks[i].tasks, number_of_tasks))
+        print(tasks)
         return tasks
 
 
